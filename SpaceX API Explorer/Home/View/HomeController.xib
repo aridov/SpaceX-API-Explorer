@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeController" customModule="SpaceX_API_Explorer" customModuleProvider="target">
+            <connections>
+                <outlet property="tableView" destination="cw7-a9-zQk" id="VLz-S4-yZ1"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cw7-a9-zQk">
+                    <rect key="frame" x="20" y="126" width="374" height="736"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="3IZ-dn-4Fa"/>
+                    </connections>
+                </tableView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select category for explore" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7OG-we-YJE">
+                    <rect key="frame" x="104" y="85" width="206" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" red="0.86386390589999995" green="1" blue="0.98575688230000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <constraints>
+                <constraint firstItem="cw7-a9-zQk" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="0GG-62-Qcc"/>
+                <constraint firstItem="7OG-we-YJE" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="41" id="Fv3-u7-8ub"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="cw7-a9-zQk" secondAttribute="trailing" constant="20" id="ShL-cI-w2a"/>
+                <constraint firstItem="7OG-we-YJE" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="gjs-No-oXv"/>
+                <constraint firstItem="cw7-a9-zQk" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="jhs-RB-dvT"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="cw7-a9-zQk" secondAttribute="bottom" id="o5U-Nk-6AK"/>
+                <constraint firstItem="cw7-a9-zQk" firstAttribute="top" secondItem="7OG-we-YJE" secondAttribute="bottom" constant="20" id="or6-Kj-uaQ"/>
+            </constraints>
+            <point key="canvasLocation" x="137.68115942028987" y="124.55357142857142"/>
+        </view>
+    </objects>
+</document>
