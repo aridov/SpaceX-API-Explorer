@@ -7,16 +7,12 @@
 
 import Foundation
 
-//protocol HomePresenterProtocol {
-//    func didSelect
-//}
-
 class HomePresenter {
     var numberOfRows: Int {
-        return HomeItem.allCases.count
+        return ExploreKind.allCases.count
     }
     
-    func getItem(by index: Int) -> HomeItem {
-        return HomeItem.allCases[index]
+    func getItem(by index: Int) -> ExploreKind {
+        return ExploreKind.allCases[index]
     }
 }

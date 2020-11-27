@@ -17,18 +17,18 @@ class HomeController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        initNavBar()
+        setupNavBar()
         initViews()
     }
     
-    func initNavBar() {
+    fileprivate func setupNavBar() {
         UINavigationBar.appearance().backgroundColor = UIColor.lightGray
         navigationController?.navigationBar.standardAppearance.titleTextAttributes = [.foregroundColor: UIColor.red]
 
         navigationItem.title = "Home"
     }
     
-    func initViews() {
+    fileprivate func initViews() {
         tableView.register(UINib(nibName: HomeController.cellIdentifier, bundle: nil), forCellReuseIdentifier: HomeController.cellIdentifier)
         tableView.dataSource = self
         
@@ -54,5 +54,9 @@ extension HomeController: UITableViewDataSource {
 extension HomeController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
+        
+        let explorePresenter = ExplorePresenter(from: homePresenter.getItem(by: indexPath.row))
+        let exploreController = ExploreController(with: explorePresenter)
+        navigationController?.pushViewController(exploreController, animated: true)
     }
 }

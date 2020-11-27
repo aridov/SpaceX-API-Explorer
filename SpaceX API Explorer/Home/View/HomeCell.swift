@@ -11,7 +11,11 @@ class HomeCell: UITableViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
     
-    func setHomeItem(_ item: HomeItem) {
+    func setHomeItem(_ item: ExploreKind) {
         titleLabel.text = item.rawValue
+    }
+    
+    override func prepareForReuse() {
+        titleLabel.text = nil
     }
 }

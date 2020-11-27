@@ -7,9 +7,15 @@
 
 import Foundation
 
-enum HomeItem: String, CaseIterable {
+enum ExploreKind: String, CaseIterable {
     case Capsules
     case Dragons
     case Rockets
     case Ships
+}
+
+extension ExploreKind {
+    func getTitle() -> String {
+        return self.rawValue
+    }
 }
