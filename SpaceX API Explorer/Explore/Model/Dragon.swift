@@ -16,10 +16,6 @@ struct Dragon: Codable {
 }
 
 extension Dragon: ExploreItem {
-    var kind: ExploreKind {
-        return .Dragons
-    }
-    
     func getTitle() -> String {
         return name
     }

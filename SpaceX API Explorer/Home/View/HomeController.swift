@@ -55,8 +55,11 @@ extension HomeController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         
-        let explorePresenter = ExplorePresenter(from: homePresenter.getItem(by: indexPath.row))
-        let exploreController = ExploreController(with: explorePresenter)
-        navigationController?.pushViewController(exploreController, animated: true)
+        showExploreController(for: homePresenter.getItem(by: indexPath.row))
+    }
+    
+    fileprivate func showExploreController(for item: ExploreKind) {
+        let explorePresenter = ExplorePresenter(from: item)
+        navigationController?.pushViewController(ExploreController(with: explorePresenter), animated: true)
     }
 }

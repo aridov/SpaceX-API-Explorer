@@ -16,10 +16,6 @@ struct Rocket: Codable {
 }
 
 extension Rocket: ExploreItem {
-    var kind: ExploreKind {
-        return .Rockets
-    }
-    
     func getTitle() -> String {
         return name
     }

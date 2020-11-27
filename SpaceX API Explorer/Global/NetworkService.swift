@@ -7,42 +7,64 @@
 
 import Foundation
 
-fileprivate enum spacexURL: String {
-    case capsules = "Capsules/"
-    case dragons = "Dragons/"
-    case rockets = "Rockets/"
-    case ships = "Ships/"
+fileprivate enum SpacexURL: String {
+    case capsules = "https://api.spacexdata.com/v4/capsules"
+    case dragons = "https://api.spacexdata.com/v4/dragons"
+    case rockets = "https://api.spacexdata.com/v4/rockets"
+    case ships = "https://api.spacexdata.com/v4/ships"
+}
+
+extension SpacexURL {
+    func getTitle() -> String {
+        return self.rawValue
+    }
 }
 
 class NetworkService {
     typealias ExploreRequestResult = (Result<[ExploreItem], Error>) -> Void
     
-    func fetchItems(for exploreItem: ExploreItem, completion: ExploreRequestResult) {
-        switch exploreItem.kind {
+    func fetchItems(for kind: ExploreKind, completion: @escaping ExploreRequestResult) {
+        guard let url = URL(string: getUrlString(for: kind)) else { return }
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data else { return }
+            self.decode(for: kind, from: data, completion: completion)
+        }.resume()
+    }
+    
+    fileprivate func getUrlString(for kind: ExploreKind) -> String {
+        var urlString = ""
+        
+        switch kind {
         case .Capsules:
-            fetchCapsules(completion)
+            urlString = SpacexURL.capsules.getTitle()
         case .Dragons:
-            fetchDragons(completion)
+            urlString = SpacexURL.dragons.getTitle()
         case .Rockets:
-            fetchRockets(completion)
+            urlString = SpacexURL.rockets.getTitle()
         case .Ships:
-            fetchShips(completion)
+            urlString = SpacexURL.ships.getTitle()
         }
+
+        return urlString
     }
     
-    func fetchCapsules(_ completion: ExploreRequestResult) {
-            
-    }
-        
-    func fetchDragons(_ completion: ExploreRequestResult) {
-            
-    }
-       
-    func fetchRockets(_ completion: ExploreRequestResult) {
-        
-    }
-    
-    func fetchShips(_ completion: ExploreRequestResult) {
-        
+    fileprivate func decode(for kind:ExploreKind, from data: Data, completion: @escaping ExploreRequestResult) {
+        do {
+            var exploreData = [ExploreItem]()
+            let decoder = JSONDecoder()
+            switch kind {
+            case .Capsules:
+                exploreData = try decoder.decode([Capsule].self, from: data)
+            case .Dragons:
+                exploreData = try decoder.decode([Dragon].self, from: data)
+            case .Rockets:
+                exploreData = try decoder.decode([Rocket].self, from: data)
+            case .Ships:
+                exploreData = try decoder.decode([Ship].self, from: data)
+            }
+            completion(.success(exploreData))
+        } catch let error {
+            completion(.failure(error))
+        }
     }
 }

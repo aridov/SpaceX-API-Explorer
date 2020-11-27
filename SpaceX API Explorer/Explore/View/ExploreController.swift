@@ -37,6 +37,12 @@ class ExploreController: UIViewController {
         fetchItems()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        self.explorePresenter = nil
+    }
+
     fileprivate func setupNavBar() {
         navigationItem.title = explorePresenter.title
     }
@@ -49,7 +55,8 @@ class ExploreController: UIViewController {
     }
     
     fileprivate func fetchItems() {
-        
+        explorePresenter.attachView(view: self)
+        explorePresenter.fetchItems()
     }
 }
 
@@ -65,5 +72,25 @@ extension ExploreController: UITableViewDataSource {
         cell.setExploreItem(exploreItem)
         
         return cell
+    }
+}
+
+extension ExploreController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+    }
+}
+
+extension ExploreController: ExploreProtocol {
+    func startLoading() {
+        print("start loading")
+    }
+    
+    func finishLoading() {
+        print("finish loading")
+    }
+    
+    func reloadItems() {
+        tableView.reloadData()
     }
 }

@@ -10,15 +10,19 @@ import Foundation
 protocol ExploreProtocol {
     func startLoading()
     func finishLoading()
-    func setItems(_ items: [ExploreItem])
+    func reloadItems()
 }
 
 class ExplorePresenter {
     fileprivate var kind: ExploreKind
     fileprivate var items = [ExploreItem] ()
     
-    init(from kind: ExploreKind) {
+    fileprivate let networkService: NetworkService
+    fileprivate var exploreView: ExploreProtocol?
+    
+    init(from kind: ExploreKind, networkService: NetworkService = NetworkService()) {
         self.kind = kind
+        self.networkService = networkService
     }
     
     var title: String {
@@ -31,5 +35,26 @@ class ExplorePresenter {
     
     func getItem(by index: Int) -> ExploreItem {
         return items[index]
+    }
+    
+    func attachView(view: ExploreProtocol) {
+        self.exploreView = view
+    }
+    
+    func fetchItems() {
+        exploreView?.startLoading()
+        networkService.fetchItems(for: kind) {[weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                    case .success(let items):
+                        self?.items = items
+                        self?.exploreView?.reloadItems()
+                    case .failure(let error):
+                        print(error)
+                }
+                
+                self?.exploreView?.finishLoading()
+            }
+        }
     }
 }

@@ -16,10 +16,6 @@ struct Ship: Codable {
 }
 
 extension Ship: ExploreItem {
-    var kind: ExploreKind {
-        return .Ships
-    }
-    
     func getTitle() -> String {
         return name
     }

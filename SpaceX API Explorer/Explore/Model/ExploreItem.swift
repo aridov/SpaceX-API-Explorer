@@ -8,6 +8,5 @@
 import Foundation
 
 protocol ExploreItem {
-    var kind: ExploreKind {get}
     func getTitle() -> String
 }

@@ -8,19 +8,15 @@
 import Foundation
 
 struct Capsule: Codable {
-    var name: String
+    var serial: String
     
     enum CodingKeys: String, CodingKey {
-        case name
+        case serial
     }
 }
 
 extension Capsule: ExploreItem {
-    var kind: ExploreKind {
-        return .Capsules
-    }
-    
     func getTitle() -> String {
-        return name
+        return serial
     }
 }

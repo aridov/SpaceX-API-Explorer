@@ -14,4 +14,8 @@ class ExploreCell: UITableViewCell {
     func setExploreItem(_ item: ExploreItem) {
         titleLabel.text = item.getTitle()
     }
+    
+    override func prepareForReuse() {
+        titleLabel.text = nil
+    }
 }
